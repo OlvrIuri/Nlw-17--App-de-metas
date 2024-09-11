@@ -39,3 +39,17 @@ Coletar os dados Processar os dados (manipular, alterar ...) Apresentar os dados
  criar, passar argumento
  excutar
  arrow function / named function
+
+## Estrutura de repetição
+while
+
+## Condicionais
+switch
+if/else
+
+## Módulos em Node.js:
+Importação de módulos (require, CommonJS)
+Biblioteca 'inquirer' para criar prompts interativos
+
+## Programação assíncrona e Promises:
+Uso de funções assíncronas (async/await)
