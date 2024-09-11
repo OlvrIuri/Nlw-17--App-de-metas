@@ -103,6 +103,7 @@ const removerMetas = async () => {
     mensagem = 'Metas removidas com sucesso!'
 
 }
+
 const  start = async() => {
     
     while(true){
@@ -129,7 +130,7 @@ const  start = async() => {
                 {
                     name:'Remover metas',
                     value:'remover'
-                }
+                },
                 {
                     name : 'Sair',
                     value: 'sair'
