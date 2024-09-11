@@ -11,7 +11,7 @@ const cadastrarMeta = async () => {
     const meta = await input ({message: 'Digite a meta:'})
 
     if(meta.length == 0){
-        console.log('A meta não pode ser vazia')
+        mensagem = 'A meta não pode ser vazia'
         return
 }
 
@@ -31,7 +31,7 @@ const listarMetas = async () => {
     })
 
     if(respostas.length == 0){
-        console.log('Nenhuma meta selecionada')
+        mensagem = 'Nenhuma meta selecionada'
         return
     }
     respostas.forEach((resposta) => {
@@ -42,7 +42,7 @@ const listarMetas = async () => {
         meta.checked = true
     })
 
-    console.log('Meta(s) marcada(s) como concluída(s)')
+    mensagem = 'Meta(s) marcada(s) como concluída(s)'
 }
 
 const metasRealizadas = async () =>{
@@ -51,30 +51,36 @@ const metasRealizadas = async () =>{
     })
     
     if (realizadas.length == 0){
-        console.log('Nenhuma meta foi realizada :(')
+        mensagem = 'Nenhuma meta foi realizada :('
         return
     }
 
     await select({
-        message: 'Metas realizadas' + realizadas.length,
+        message: 'Metas realizadas: ' + realizadas.length,
         choices: [...realizadas]
     })
 }
 
 const metasAbertas = async () => {
-    const abertas =  metas.filter((meta) => {
-        return meta.checked != true 
-    })
-
-    if(abertas.length == 0) {
-        console.log('Não existem metas abertas :)')
+    if (metas.length == 0) {
+        mensagem = "Não existem metas!"
         return
     }
-    await select({
-        message: 'Metas abertas',
-        choices: [...metas]
-        })
+
+    const abertas = metas.filter((meta) => {
+        return meta.checked != true
+    })
+
+    if (abertas.length == 0) {
+        mensagem = 'Não existem metas abertas! :)'
+        return
     }
+
+    await select({
+        message: "Metas Abertas: " + abertas.length,
+        choices: [...abertas]
+    })
+}
 
 const removerMetas = async () => {
     if(metas.length == 0){
@@ -90,7 +96,7 @@ const removerMetas = async () => {
         choices: [...metasDesmarcadas],
         instructions:false,
     })
-    if (itemsARemover.length){
+    if (itemsARemover.length == 0){
         mensagem = 'Nenhum item para deletar!'
         return
     }
@@ -104,9 +110,22 @@ const removerMetas = async () => {
 
 }
 
+const mostrarMensagem = () => {
+    console.clear();
+
+    if (mensagem != ''){
+        console.log(mensagem)
+        console.log('')
+        mensagem=''
+        
+    }
+}
+
 const  start = async() => {
     
     while(true){
+        
+        mostrarMensagem()
 
         const opcao = await select({
             message: 'Menu',
